@@ -56,7 +56,28 @@ function removeProduct(event) {
 // ITERATION 5
 
 function createProduct() {
-  //... your code goes here
+  let newProductName = document.getElementsByClassName('create-product')[0].getElementsByTagName('input')[0];
+  let newPrice = document.getElementsByClassName('create-product')[0].getElementsByTagName('input')[1];
+  let newRow = document.createElement('tr');
+  newRow.classList.add('product');
+  newRow.innerHTML = ` <td class="name">
+  <span>${newProductName.value}</span>
+</td>
+<td class="price">$<span>${newPrice.value}</span></td>
+<td class="quantity">
+  <input type="number" value="0" min="0" placeholder="Quantity" />
+</td>
+<td class="subtotal">$<span>0</span></td>
+<td class="action">
+  <button class="btn btn-remove">Remove</button>
+</td> `;
+newRow.querySelector('.btn-remove').addEventListener('click', removeProduct);
+let parent = document.querySelector('#cart tbody');
+parent.appendChild(newRow);
+newProductName.value = '';
+newPrice.value = 0; 
+
+  
 }
 
 window.addEventListener('load', () => {
@@ -66,6 +87,9 @@ window.addEventListener('load', () => {
   for (let i = 0; i < removeList.length; i++) {
     removeList[i].addEventListener('click', removeProduct);
   }
+
+  const CreateBtn = document.getElementById('create');
+  CreateBtn.addEventListener('click', createProduct);
 
 
 
